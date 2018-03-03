@@ -1,0 +1,384 @@
+{% extends 'littleStar/base.html' %}{% load static %} {% block body_block %}
+<div class="container">
+    <div class="col-lg-12">
+            <div class="row kidPersonalDetails">
+                    <div class="col-lg-1"></div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>UID:</strong>
+                        </p>
+                        <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Name:</strong>
+                        </p>
+                        <p> {{kidUID.childname}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Date of Birth:</strong>
+                        </p>
+                        <p>{{kidUID.dob}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Father's Name:</strong>
+                        </p>
+                        <p>{{kidUID.fathername}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Mother's Name:</strong>
+                        </p>
+                        <p>{{kidUID.mothername}}</p>
+                     </div>
+                     <div class="col-lg-1"></div>
+                  </div>{% if doctorSpecialization == 'anthropometry' %} {% endif %} </div>
+    <div class="col-lg-12">
+        {% if doctorSpecialization == 'anthropometry' %}
+                <div class="row kidDetailsForms">  {% if messages %}
+            <ul class="messages orangeErrorMessage errorMessage ">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> {% endfor %} </ul> {% endif %} {% if anthropometry_form == None %}
+            <p class="loginHeader">Anthropometry</p>
+            <div class="anthromentryFromToBeShown">
+                <div class="col-lg-6">
+                    <div class="bmiHolder">
+                        <p class="bmiTitle">
+                            <strong>BMI:</strong>
+                        </p>
+                        <p id="calculatedBMI">0</p>
+                    </div>
+                    <div class="bmiHolder">
+                        <p class="bmiTitle">
+                            <strong>BSA:</strong>
+                        </p>
+                        <p id="calculatedBSA">0</p>
+                    </div>
+                </div>
+                <form enctype="multipart/form-data" class="col-lg-6" method="POST" action="{% url 'littleStar:anthropometry' %}"
+                    novalidate id="anthropometryForm"> {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field">
+                            <label for="id_HEIGHT">HEIGHT:</label>
+                            <input type="number" name="height" required="" value="{{anthropometry_form.height}}"
+                                id="id_HEIGHT"> </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <label for="id_WEIGHT">WEIGHT:</label>
+                            <input type="number" name="weight" required="" id="id_WEIGHT" value="{{anthropometry_form.weight}}"> </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <label for="id_HEAD_CIRCUMFERENCE">HEAD CIRCUMFERENCE:</label>
+                            <input type="number" name="headcircumference" required="" id="id_HEAD_CIRCUMFERENCE"
+                                value="{{anthropometry_form.headcircumference}}"> </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <label for="id_MID_UPPER_ARM_CIRCUMFERENCE">MID UPPER ARM CIRCUMFERENCE:</label>
+                            <input type="number" name="midupperarmcircumference" required=""
+                                value="{{anthropometry_form.midupperarmcircumference}}" id="id_MID_UPPER_ARM_CIRCUMFERENCE"> </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <label for="id_TRICEP_SKIN_FOLDNESS">TRICEP SKIN FOLDNESS:</label>
+                            <input type="number" name="tricepskinfoldness" required="" id="id_TRICEP_SKIN_FOLDNESS"
+                                value={{anthropometry_form.tricepskinfoldness}}> </div>
+                    </div>
+                    <div class="row" style="display: none;">
+                        <div class="input-field">
+                            <label for="id_BMI">BMI:</label>
+                            <input type="text" name="bmi" required="" id="id_BMI" maxlength="245" value="{{anthropometry_form.bmi}}"> </div>
+                    </div>
+                    <div class="row" style="display: none;">
+                        <div class="input-field">
+                            <label for="id_BSA">BSA:</label>
+                            <input type="text" name="bsa" required="" id="id_BSA" maxlength="245" value={{anthropometry_form.bsa}}> </div>
+                    </div>
+                    <div class="row" style="display: none;">
+                        <div class="input-field">
+                            <label for="id_YEAR">YEAR:</label>
+                            <input type="text" name="year" required="" id="id_YEAR" maxlength="245" value={{anthropometry_form.year}}> </div>
+                    </div>
+                    <div class="row" style="display: none;">
+                        <div class="input-field">
+                            <label for="id_kidUid">KidUid:</label>
+                            <input type="text" name="kiduid" required="" id="id_kidUid" maxlength="245" value={{anthropometry_form.kiduid}}> </div>
+                    </div>
+                    <button type="submit" name="" class="loginSubmit">Create </button>
+                </form>
+            </div> {% elif anthropometry_form is not None %}
+            <p class="formFilledMessage">The Anthropometry form has been filled. To Change please contact ADMIN</p> {% endif %}
+            <div class="clearFLoats"></div> {% endif %} {% if doctorSpecialization == 'dental' %} {% if dentalFormCheck == None %}
+            <div class="dentalFormHolder">
+                <form enctype="multipart/form-data" method="POST" action="{% url 'littleStar:dental' %}" id="" novalidate> {% csrf_token %}
+                    <p class="mainTitle">DENTAL</p>
+                    <div class="col-lg-6">
+                        <p class="subHeadings">CONDITIONS</p>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Mouth Floor</label> {{ dentalForm.mouthfloor }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.mouthfloorRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Palate</label> {{ dentalForm.palate }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.palateRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Lips</label> {{ dentalForm.lips }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.lipsRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Cheeks</label> {{ dentalForm.cheeks }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.cheeksRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Tongue</label> {{ dentalForm.tongue }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.tongueRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Throat</label> {{ dentalForm.throat }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.throatRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Frenulam</label> {{ dentalForm.frenulam }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.frenulamRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Ridges</label> {{ dentalForm.ridges }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.ridgesRemarks }} </div>
+                        </div>
+                    </div>
+                    <!--col-lg-6-->
+                    <div class="col-lg-6">
+                        <p class="subHeadings">FINDINGS</p>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Plaque</label> {{ dentalForm.plaque }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.plaqueRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Stain</label> {{ dentalForm.stain }} </div>
+                            <div class="form-group col-lg-12 ">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.stainRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Gingivitis</label> {{ dentalForm.gingivitis }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.gingivitisRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Caries</label> {{ dentalForm.caries }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.cariesRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Infection</label> {{ dentalForm.infection }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.infectionRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Fractured or Cracked Teeth</label> {{ dentalForm.fracturedorcrackedteeth }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.fracturedorcrackedteethRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Habits</label> {{ dentalForm.habits }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.habitsRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Calculus</label> {{ dentalForm.calculus }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.calculusRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Malocclusion</label> {{ dentalForm.malocclusion }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.malocclusionRemarks }} </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Impacted Wisdom Teeth</label> {{ dentalForm.impactedwisdomteeth }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.impactedwisdomteethRemarks }} </div>
+                        </div>
+                    </div>
+                    <!--col-lg-6-->
+                    <p class="subHeadings">PROVISIONAL DIAGNOSIS</p>
+                    <div class="row">
+                        <div class="form-group col-lg-12 provisionalDiagnosis">
+                            <label for="exampleInputName">Provisional Diagnosis Options</label> {{ dentalForm.provisionalDiagnosisoptions }} </div>
+                        <div
+                            class="variousOptionsForProvisionals">
+                            <div class="form-group col-lg-12  abnormalFrenum">
+                                <label for="exampleInputName">Abnormal Frenum</label> {{ dentalForm.abnormalfrenum }} </div>
+                            <div class="form-group col-lg-12  prediodontalAbnormalities">
+                                <label for="exampleInputName">Periodontal Abnormalities</label> {{ dentalForm.periodontalabnormalities }} </div>
+                            <div class="form-group col-lg-12  cariesTypes">
+                                <label for="exampleInputName2">Caries Types</label> {{ dentalForm.cariestypes }} </div>
+                            <div class="form-group col-lg-12  fracturedOrCrackedTeethTypes">
+                                <label for="exampleInputName2">Fractured or Cracked Teeth Types</label> {{ dentalForm.fracturedorcrackedteethtypes }} </div>
+                            <div class="form-group col-lg-12  orthodonticMaloccilsionAbnormalitiesTypes">
+                                <label for="exampleInputName2">Orthodontic Malocculsion Abnormalities Types</label> {{ dentalForm.orthodonticmalocculsionabnormalitiestypes}}
+                                </div>
+                            <div class="form-group col-lg-12  orthodonticMaloccilsionAbnormalitiesOtherTypes">
+                                <label for="exampleInputName2">Orthodontic Malocculsion Abnormalities Other Types</label>
+                                <br/>
+                                <br/> {{ dentalForm.orthodonticmalocculsionabnormalitiesotherstypes}} </div>
+                            <div class="form-group col-lg-12  habitsTypes">
+                                <label for="exampleInputName2">Habit Types</label> {{ dentalForm.habitstypes}} </div>
+                    </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <label for="exampleInputName2">Recommendation Types</label> {{ dentalForm.recommendationtypes}} </div>
+            </div>
+            <div class="row">
+                <div class="input-field" style="display: none;">
+                    <label for="id_kidUid">childuid:</label>
+                    <input type="text" name="childuid" required="" id="id_kidUid" maxlength="245"> </div>
+            </div>
+            <button type="submit" name="" class="loginSubmit">Create </button>
+            </form>
+        </div> {% elif dentalFormCheck is not None %}
+        <p class="formFilledMessage">The Dental form has been filled. To Change please contact ADMIN</p> {% endif %} </div> {% endif %} </div>
+    <div class="col-lg-12">
+        <div class="row kidDetailsForms">
+            {% if doctorSpecialization == 'pediatrics' %} 
+            {% if kidsPediatric == None %}
+                <p class="mainTitle">PEDIATRICS</p>
+                <form enctype="multipart/form-data" method="POST" action="{% url 'littleStar:pediatrics' %}"
+                novalidate> {% csrf_token %}
+                <div class="col-lg-12 pediatricsFormHolder">
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">General Apperance</label> {{ pediatricsForm.generalApperance }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.generalApperanceRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Scalp And Skin</label> {{ pediatricsForm.scalpandskin }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.scalpandskinRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Lymph Nodes</label> {{ pediatricsForm.lymphNodes }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.lymphNodesRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Neck</label> {{ pediatricsForm.neck }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.neckRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Ears</label> {{ pediatricsForm.ears }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.earsRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Nose</label> {{ pediatricsForm.nose }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.noseRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Throat And Oral Cavities</label> {{ pediatricsForm.throatAndOralCavity }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.throatAndOralCavityRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group col-lg-12 optionsOne">
+                                <label for="exampleInputName2">Cardio Vascular System</label> {{ pediatricsForm.cardioVascularSystem }} </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.cardioVascularSystemRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                                <div class="form-group col-lg-12 optionsOne">
+                                    <label for="exampleInputName2">Respiratory System</label> {{ pediatricsForm.respiratatorySystem }} </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.respiratatorySystemRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                                <div class="form-group col-lg-12 optionsOne">
+                                    <label for="exampleInputName2">Abdomen</label> {{ pediatricsForm.abdomen }} </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.abdomenRemarks }} </div>
+                         </div>
+                        <div class="col-lg-6">
+                                <div class="form-group col-lg-12 optionsOne">
+                                    <label for="exampleInputName2">Upper and Lower Extremities</label> {{ pediatricsForm.upperAndLowerExtremities }} </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.upperAndLowerExtremitiesRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                                <div class="form-group col-lg-12 optionsOne">
+                                    <label for="exampleInputName2">Spine Gait and Posture</label> {{ pediatricsForm.spineGaitAndPosture }} </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.spineGaitAndPostureRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                                <div class="form-group col-lg-12 optionsOne">
+                                    <label for="exampleInputName2">High Mental Posture</label> {{ pediatricsForm.higherMentalPosture }} </div>
+                                <div class="form-group col-lg-12">
+                                    <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.higherMentalPostureRemarks }} </div>
+                        </div>
+                        <div class="col-lg-6">
+                               
+                                <div class="form-group col-lg-12">
+                                    <label for="exampleInputEmail2">Pediatric Recommendations</label> {{ pediatricsForm.pediatricRecommendations }} </div>
+                         </div>
+                            <div class="col-lg-6">
+                                    <div class="input-field" style="display: none;">
+                                        <label for="id_kidUid">childuid:</label>
+                                        <input type="text" name="childuid" required="" id="id_kidUid" maxlength="245"> </div>
+                                </div>
+                    </div>
+         
+                    <button type="submit" name="" class="loginSubmit">Create </button> 
+                 </form>
+                 {% elif kidsPediatric is not None %}
+                 <p class="formFilledMessage">The Pediatrics form has been filled. To Change please contact ADMIN</p> 
+                 {% endif %} 
+                 
+                 {% endif%}
+       
+                </div>
+
+    </div>
+</div>
+{% endblock %}

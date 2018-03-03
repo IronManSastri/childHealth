@@ -1,0 +1,246 @@
+{% extends 'littleStar/base.html' %}{% load static %} {% block body_block %}
+<div class="container">
+<div class="col-lg-12">
+        <div class="row kidPersonalDetails">
+                <div class="col-lg-1"></div>
+                 <div class="col-lg-2">
+                    <p class="titles">
+                       <strong>UID:</strong>
+                    </p>
+                    <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
+                 </div>
+                 <div class="col-lg-2">
+                    <p class="titles">
+                       <strong>Name:</strong>
+                    </p>
+                    <p> {{kidUID.childname}}</p>
+                 </div>
+                 <div class="col-lg-2">
+                    <p class="titles">
+                       <strong>Date of Birth:</strong>
+                    </p>
+                    <p>{{kidUID.dob}}</p>
+                 </div>
+                 <div class="col-lg-2">
+                    <p class="titles">
+                       <strong>Father's Name:</strong>
+                    </p>
+                    <p>{{kidUID.fathername}}</p>
+                 </div>
+                 <div class="col-lg-2">
+                    <p class="titles">
+                       <strong>Mother's Name:</strong>
+                    </p>
+                    <p>{{kidUID.mothername}}</p>
+                 </div>
+                 <div class="col-lg-1"></div>
+        </div>
+</div>
+<div class="col-lg-12">
+   <div class="row kidDetailsForms">
+      <div class="dentalFormHolder">
+         <form enctype="multipart/form-data" method="POST" action="{% url 'littleStar:dental' %}" id="" novalidate>
+            {% csrf_token %}
+            <p class="mainTitle">DENTAL</p>
+            <div class="col-lg-6">
+               <p class="subHeadings">CONDITIONS</p>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Mouth Floor</label> {{ dentalForm.mouthfloor }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.mouthfloorRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Palate</label> {{ dentalForm.palate }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.palateRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Lips</label> {{ dentalForm.lips }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.lipsRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Cheeks</label> {{ dentalForm.cheeks }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.cheeksRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Tongue</label> {{ dentalForm.tongue }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.tongueRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Throat</label> {{ dentalForm.throat }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.throatRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Frenulam</label> {{ dentalForm.frenulam }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.frenulamRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Ridges</label> {{ dentalForm.ridges }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.ridgesRemarks }} 
+                  </div>
+               </div>
+            </div>
+            <!--col-lg-6-->
+            <div class="col-lg-6">
+               <p class="subHeadings">FINDINGS</p>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Plaque</label> {{ dentalForm.plaque }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.plaqueRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Stain</label> {{ dentalForm.stain }} 
+                  </div>
+                  <div class="form-group col-lg-12 ">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.stainRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Gingivitis</label> {{ dentalForm.gingivitis }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.gingivitisRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Caries</label> {{ dentalForm.caries }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.cariesRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Infection</label> {{ dentalForm.infection }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.infectionRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Fractured or Cracked Teeth</label> {{ dentalForm.fracturedorcrackedteeth }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.fracturedorcrackedteethRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Habits</label> {{ dentalForm.habits }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.habitsRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Calculus</label> {{ dentalForm.calculus }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.calculusRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Malocclusion</label> {{ dentalForm.malocclusion }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.malocclusionRemarks }} 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="form-group col-lg-12 optionsOne">
+                     <label for="exampleInputName2">Impacted Wisdom Teeth</label> {{ dentalForm.impactedwisdomteeth }} 
+                  </div>
+                  <div class="form-group col-lg-12">
+                     <label for="exampleInputEmail2">Remarks</label> {{ dentalForm.impactedwisdomteethRemarks }} 
+                  </div>
+               </div>
+            </div>
+            <!--col-lg-6-->
+            <p class="subHeadings">PROVISIONAL DIAGNOSIS</p>
+            <div class="row">
+               <div class="form-group col-lg-12 provisionalDiagnosis">
+                  <label for="exampleInputName">Provisional Diagnosis Options</label> {{ dentalForm.provisionalDiagnosisoptions }} 
+               </div>
+               <div
+                  class="variousOptionsForProvisionals">
+                  <div class="form-group col-lg-12  abnormalFrenum">
+                     <label for="exampleInputName">Abnormal Frenum</label> {{ dentalForm.abnormalfrenum }} 
+                  </div>
+                  <div class="form-group col-lg-12  prediodontalAbnormalities">
+                     <label for="exampleInputName">Periodontal Abnormalities</label> {{ dentalForm.periodontalabnormalities }} 
+                  </div>
+                  <div class="form-group col-lg-12  cariesTypes">
+                     <label for="exampleInputName2">Caries Types</label> {{ dentalForm.cariestypes }} 
+                  </div>
+                  <div class="form-group col-lg-12  fracturedOrCrackedTeethTypes">
+                     <label for="exampleInputName2">Fractured or Cracked Teeth Types</label> {{ dentalForm.fracturedorcrackedteethtypes }} 
+                  </div>
+                  <div class="form-group col-lg-12  orthodonticMaloccilsionAbnormalitiesTypes">
+                     <label for="exampleInputName2">Orthodontic Malocculsion Abnormalities Types</label> {{ dentalForm.orthodonticmalocculsionabnormalitiestypes}}
+                  </div>
+                  <div class="form-group col-lg-12  orthodonticMaloccilsionAbnormalitiesOtherTypes">
+                     <label for="exampleInputName2">Orthodontic Malocculsion Abnormalities Other Types</label>
+                     <br/>
+                     <br/> {{ dentalForm.orthodonticmalocculsionabnormalitiesotherstypes}} 
+                  </div>
+                  <div class="form-group col-lg-12  habitsTypes">
+                     <label for="exampleInputName2">Habit Types</label> {{ dentalForm.habitstypes}} 
+                  </div>
+               </div>
+            </div>
+            <hr/>
+            <div class="row">
+               <div class="form-group col-lg-12">
+                  <label for="exampleInputName2">Recommendation Types</label> {{ dentalForm.recommendationtypes}} 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field" style="display: none;">
+                  <label for="id_kidUid">childuid:</label>
+                  <input type="text" name="childuid" required="" id="id_kidUid" maxlength="245"> 
+               </div>
+            </div>
+            <button type="submit" name="" class="loginSubmit">Create </button>
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock %}

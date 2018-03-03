@@ -1,0 +1,53 @@
+{% extends 'littleStar/base.html' %} {% block body_block %}
+<div class="loginContainer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="loginFormContainer"> {% if messages %}
+                    <ul class="messages orangeErrorMessage errorMessage ">
+                        <P>WE HAVE THE FOLLOWING DUPLICATE LIST</P> {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"
+                            {% endif %}>{{ message }}</li> {% endfor %} </ul> {% endif %}
+                    <form method="post" action="{% url 'littleStar:createSchool' %} "
+                        enctype="multipart/form-data"> {% csrf_token %}
+                        <p class="loginHeader">CREATE SCHOOL DETAILS</p>
+                        <div class="row">
+                            <div class="input-field">
+                                <!-- <label for="username">Username:</label> -->
+                                <input type="text" name="schoolname" required placeholder="Name of the school"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <!-- <label for="username">Username:</label> -->
+                                <input type="text" name="schooluid" required placeholder="Create a Unique school id"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <!-- <label for="username">Username:</label> -->
+                                <input type="text" name="schoolAddress" required placeholder="Address of the school"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <!-- <label for="username">Username:</label> -->
+                                <input type="text" name="principalName" required placeholder="Name of the Principal"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <!-- <label for="username">Username:</label> -->
+                                <input type="text" name="schoolContactNumber" required placeholder="School Contact Number"> </div>
+                        </div>
+                        <div class="row ">
+                            <div class="input-field ">
+                                <label for="excel ">Upload Kid Details Excel in the specified Format</label>
+                                <br/>
+                                <input type="file" name="excel"> </div>
+                        </div>
+                        <input type="submit" class='loginSubmit' name=" " value="Create School Data" /> </form>
+                    <div class="clearFLoats"></div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>{% endblock %}

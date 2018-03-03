@@ -1,0 +1,31 @@
+{% extends "littleStar/base.html" %} {% load staticfiles %} {% block body_block %}
+<div class="loginContainer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="loginFormContainer">
+          <p class="loginHeader">CREATE DOCTOR ACCESS</p> {% if registered %} {% if messages %}
+          <ul class="messages orangeErrorMessage errorMessage ">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> {% endfor %} </ul> {% endif %} {% endif%}
+          <form enctype="multipart/form-data" method="POST"
+            id="registerForm"> {% csrf_token %} {% for field in user_form %}
+            <div class="row">
+              <div class="input-field"> {{ field.errors }} {{ field.label_tag }} {{ field }} </div>
+            </div> {% endfor %} {% for field in profile_form %}
+            <div class="row">
+              <div class="input-field">
+                <p>Choose the specialization:</p>
+                <div class="select-wrapper">{{ field.errors }} {{ field }}</div>
+              </div>
+            </div> {% endfor %}
+            <button type="submit" name="" class="loginSubmit">Create </button>
+          </form>
+          <div class="clearFLoats"></div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</div> {% endblock %}

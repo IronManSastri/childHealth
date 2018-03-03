@@ -1,0 +1,44 @@
+{% extends 'littleStar/base.html' %}{% load static %}{% block body_block %}
+<div class="container ">
+    <div class="col-lg-12">
+            <div class="row kidPersonalDetails">
+                    <div class="col-lg-1"></div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>UID:</strong>
+                        </p>
+                        <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Name:</strong>
+                        </p>
+                        <p> {{kidUID.childname}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Date of Birth:</strong>
+                        </p>
+                        <p>{{kidUID.dob}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Father's Name:</strong>
+                        </p>
+                        <p>{{kidUID.fathername}}</p>
+                     </div>
+                     <div class="col-lg-2">
+                        <p class="titles">
+                           <strong>Mother's Name:</strong>
+                        </p>
+                        <p>{{kidUID.mothername}}</p>
+                     </div>
+                     <div class="col-lg-1"></div>
+                  </div> 
+        </div>
+    <div class="col-lg-12">
+       
+        <p class="formFilledMessage">The Form has been filled. To Change please contact ADMIN</p>
+</div></div>
+
+{% endblock %}
