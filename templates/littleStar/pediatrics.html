@@ -1,168 +1,329 @@
 {% extends 'littleStar/base.html' %}{% load static %} {% block body_block %}
 <div class="container">
-<div class="col-lg-12">
-        <div class="row kidPersonalDetails">
-                <div class="col-lg-1"></div>
-                 <div class="col-lg-2">
-                    <p class="titles">
-                       <strong>UID:</strong>
-                    </p>
-                    <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
-                 </div>
-                 <div class="col-lg-2">
-                    <p class="titles">
-                       <strong>Name:</strong>
-                    </p>
-                    <p> {{kidUID.childname}}</p>
-                 </div>
-                 <div class="col-lg-2">
-                    <p class="titles">
-                       <strong>Date of Birth:</strong>
-                    </p>
-                    <p>{{kidUID.dob}}</p>
-                 </div>
-                 <div class="col-lg-2">
-                    <p class="titles">
-                       <strong>Father's Name:</strong>
-                    </p>
-                    <p>{{kidUID.fathername}}</p>
-                 </div>
-                 <div class="col-lg-2">
-                    <p class="titles">
-                       <strong>Mother's Name:</strong>
-                    </p>
-                    <p>{{kidUID.mothername}}</p>
-                 </div>
-                 <div class="col-lg-1"></div>
-              </div>
-</div>
    <div class="col-lg-12">
-      <div class="row kidDetailsForms">
-         <p class="mainTitle">PEDIATRICS</p>
-         <form enctype="multipart/form-data" method="POST" action="{% url 'littleStar:pediatrics' %}"
-            novalidate>
-            {% csrf_token %}
-            <div class="col-lg-12 pediatricsFormHolder">
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">General Apperance</label> {{ pediatricsForm.generalApperance }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.generalApperanceRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Scalp And Skin</label> {{ pediatricsForm.scalpandskin }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.scalpandskinRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Lymph Nodes</label> {{ pediatricsForm.lymphNodes }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.lymphNodesRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Neck</label> {{ pediatricsForm.neck }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.neckRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Ears</label> {{ pediatricsForm.ears }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.earsRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Nose</label> {{ pediatricsForm.nose }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.noseRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Throat And Oral Cavities</label> {{ pediatricsForm.throatAndOralCavity }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.throatAndOralCavityRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Cardio Vascular System</label> {{ pediatricsForm.cardioVascularSystem }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.cardioVascularSystemRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Respiratory System</label> {{ pediatricsForm.respiratatorySystem }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.respiratatorySystemRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Abdomen</label> {{ pediatricsForm.abdomen }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.abdomenRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Upper and Lower Extremities</label> {{ pediatricsForm.upperAndLowerExtremities }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.upperAndLowerExtremitiesRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">Spine Gait and Posture</label> {{ pediatricsForm.spineGaitAndPosture }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.spineGaitAndPostureRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12 optionsOne">
-                     <label for="exampleInputName2">High Mental Posture</label> {{ pediatricsForm.higherMentalPosture }} 
-                  </div>
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.higherMentalPostureRemarks }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group col-lg-12">
-                     <label for="exampleInputEmail2">Pediatric Recommendations</label> {{ pediatricsForm.pediatricRecommendations }} 
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="input-field" style="display: none;">
-                     <label for="id_kidUid">childuid:</label>
-                     <input type="text" name="childuid" required="" id="id_kidUid" maxlength="245"> 
-                  </div>
-               </div>
-            </div>
-            <button type="submit" name="" class="loginSubmit">Create </button> 
-         </form>
+      <div class="row kidPersonalDetails">
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>UID:</strong>
+            </p>
+            <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Name:</strong>
+            </p>
+            <p> {{kidUID.childname}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Date of Birth:</strong>
+            </p>
+            <p>{{kidUID.dob}}</p>
+
+            <p class="titles">
+                  <strong>Age:</strong>
+               </p>
+               <p class="convertedAge">{{kidUID.age}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Father's Name:</strong>
+            </p>
+            <p>{{kidUID.fathername}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Mother's Name:</strong>
+            </p>
+            <p>{{kidUID.mothername}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Sex:</strong>
+            </p>
+            <p>{{kidUID.sex}}</p>
+         </div>
       </div>
    </div>
+   <div class="col-lg-12">
+      <div class="row kidDetailsForms">
+         {% if didntFillAnthro %}
+         <p class="mainTitle">The Kids Anthropometry Details were'nt filled yet.</p>
+         {% else %}
+         {% if isVerifiedFalse %}
+         <div class="pediatricsFormContainer">
+            <p class="mainTitle">PEDIATRICS</p>
+            <form enctype="multipart/form-data" method="POST" action="{% url 'littleStar:pediatrics' %}"
+               novalidate>
+               {% csrf_token %}
+               <div class="col-lg-12 pediatricsFormHolder">
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">General Apperance</label> {{ pediatricsForm.generalApperance }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.generalApperanceRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Scalp And Skin</label> {{ pediatricsForm.scalpandskin }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.scalpandskinRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Lymph Nodes</label> {{ pediatricsForm.lymphNodes }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.lymphNodesRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Neck</label> {{ pediatricsForm.neck }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.neckRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Ears</label> {{ pediatricsForm.ears }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.earsRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Nose</label> {{ pediatricsForm.nose }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.noseRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Throat And Oral Cavities</label> {{ pediatricsForm.throatAndOralCavity }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.throatAndOralCavityRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Cardio Vascular System</label> {{ pediatricsForm.cardioVascularSystem }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.cardioVascularSystemRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Respiratory System</label> {{ pediatricsForm.respiratatorySystem }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.respiratatorySystemRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Abdomen</label> {{ pediatricsForm.abdomen }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.abdomenRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Upper and Lower Extremities</label> {{ pediatricsForm.upperAndLowerExtremities }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.upperAndLowerExtremitiesRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">Spine Gait and Posture</label> {{ pediatricsForm.spineGaitAndPosture }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.spineGaitAndPostureRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12 optionsOne">
+                        <label for="exampleInputName2">High Mental Posture</label> {{ pediatricsForm.higherMentalPosture }} 
+                     </div>
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Remarks</label> {{ pediatricsForm.higherMentalPostureRemarks }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="form-group col-lg-12">
+                        <label for="exampleInputEmail2">Pediatric Recommendations</label> {{ pediatricsForm.pediatricRecommendations }} 
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="input-field" style="display: none;">
+                        <label for="id_kidUid">childuid:</label>
+                        <input type="text" name="childuid" required="" id="id_kidUid" maxlength="245"> 
+                     </div>
+                  </div>
+               </div> 
+               <button type="submit" name="" class="loginSubmit">Create </button> 
+            </form>
+         </div>
+         {% else%}
+         <div class="anthroFormQuestion">
+                <p>  The Anthropometry Form of the kid has been filled and You need to confirm it before you update the Pediatrics Form </p>
+                <br><br>       
+                <button type="button" id="getTheAnthoDetails" class="btn btn-default">Validate</button>
+                <br><br>
+         </div>
+         <img src="{% static 'images/loader.gif' %}" class="loader img-responsive loaderHide"  />  
 
+         <div class="showAfterAjaxCallAnthroDetails" style="display:none">
+
+        
+         <div class="col-lg-6 " >
+                        <form enctype="multipart/form-data" class="" method="POST" action="{% url 'littleStar:updateAnthropometryForm' %}"
+                        novalidate>{% csrf_token %}
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_HEIGHT">HEIGHT:</label>
+                  <input type="number" name="height" required="" value="{{anthropometry_form.height}}"
+                     id="id_HEIGHT"> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_WEIGHT">WEIGHT:</label>
+                  <input type="number" name="weight" required="" id="id_WEIGHT" value="{{anthropometry_form.weight}}"> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_HEAD_CIRCUMFERENCE">HEAD CIRCUMFERENCE:</label>
+                  <input type="number" name="headcircumference" required="" id="id_HEAD_CIRCUMFERENCE"
+                     value="{{anthropometry_form.headcircumference}}"> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_MID_UPPER_ARM_CIRCUMFERENCE">MID UPPER ARM CIRCUMFERENCE: <span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#midarmCircumference"></span></label>
+                  <input type="number" name="midupperarmcircumference" required=""
+                     value="{{anthropometry_form.midupperarmcircumference}}" id="id_MID_UPPER_ARM_CIRCUMFERENCE"> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_TRICEP_SKIN_FOLDNESS">TRICEP SKIN FOLDNESS:</label>
+                  <input type="number" name="tricepskinfoldness" required="" id="id_TRICEP_SKIN_FOLDNESS"
+                     value={{anthropometry_form.tricepskinfoldness}}> 
+               </div>
+            </div>
+            <div class="row" >
+               <div class="input-field">
+                  <label for="id_BMI">BMI:</label>
+                  <input type="text" name="bmi" required="" id="id_BMI" maxlength="245"  value="{{anthropometry_form.bmi}}"> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_BSA">BSA:</label>
+                  <input type="text" name="bsa" required="" id="id_BSA" maxlength="245"  value={{anthropometry_form.bsa}}> 
+               </div>
+            </div>
+            <div class="row" style="display: none;">
+               <div class="input-field">
+                  <label for="id_YEAR">YEAR:</label>
+                  <input type="text" name="year" required="" id="id_YEAR" maxlength="245" value={{anthropometry_form.year}}> 
+               </div>
+            </div>
+            <div class="row" style="display: none;">
+               <div class="input-field">
+                  <label for="id_kidUid">KidUid:</label>
+                  <input type="text" name="kiduid" required="" id="id_kidUid" maxlength="245" value={{anthropometry_form.kiduid}}> 
+               </div>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                   <label for="id_heartrate">Heart Rate:</label>
+                   <input type="number" name="heartrate" required="" id="id_heartrate" 
+                      value=''> 
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-field">
+                   <label for="id_temparature">Temparature:</label>
+                   <input type="number" name="temparature" required="" id="id_temparature"
+                      value=''> 
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-field">
+                   <label for="id_respiratoryrate">Respiratoy Rate:</label>
+                   <input type="number" name="respiratoryrate" required="" id="id_respiratoryrate"
+                      value=''> 
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-field">
+                   <label for="id_saturation">Saturation:</label>
+                   <input type="number" name="saturation" required="" id="id_saturation"
+                      value=''> 
+                </div>
+             </div>
+             <div class="row" >
+                <div class="input-field">
+                   <label for="id_systolic">Systolic:</label>
+                   <input type="number" name="systolic" required="" id="id_systolic"
+                      value=''> 
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-field">
+                   <label for="id_diastolic">Diastolic:</label>
+                   <input type="number" name="diastolic" required="" id="id_diastolic"
+                      value=''> 
+                </div>
+             </div>
+             <div class="row" style="display: none;">
+                <div class="input-field">
+                   <input type="" name="sign" required="" id="anthroSign"
+                      value=''> 
+                </div>
+             </div>
+             <button type="submit" name="" class="loginSubmit">CONFIRM </button>
+             </form>
+         </div>
+      
+        </div>
+
+        <!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="midarmCircumference" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">MUAC vs Age</h4>
+                </div>
+          <div class="modal-body">
+            <canvas id="myChart" ></canvas>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+         {% endif %}
+         {% endif %}
+      </div>
+   </div>
 </div>
 {% endblock %}

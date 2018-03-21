@@ -104,10 +104,18 @@ section {
 }
 
 body {
-    line-height: 1;
-    font-family: 'Raleway', sans-serif;
+    line-height: 25px;    font-family: 'Raleway', sans-serif;
     height: 100%;
     letter-spacing: 2px;
+}
+.loader{
+    width: 150px;
+    display: block;
+    margin: 100px auto;
+}
+
+.loaderHide {
+    display: none;
 }
 
 ol,
@@ -306,14 +314,23 @@ div {
     text-align: center;
 }
 
-.dentalFormHolder label,.pediatricsFormHolder label {
+.dentalFormHolder label,.pediatricsFormHolder label,.optholContainer label {
     margin-bottom: 10px;
+}
+textarea {
+    margin-top:10px;
 }
 
 .kidDetailsForms {
     background: #fff;
     box-shadow: 0 0 2px #ccc;
-    padding: 60px 60px 0 60px;
+    padding: 20px 20px 0 20px;
+}
+
+@media only screen and (min-width: 769px) {
+    .kidDetailsForms {
+        padding: 60px 60px 0 60px;
+    }
 }
 
 .loginFormContainer input:not(.loginSubmit),
@@ -440,11 +457,25 @@ input:focus {
     margin-top: 20px;
 }
 
-#calculatedBSA {
+#calculatedBSA, #calculatedSystolic, #calculatedDiastolic{
     font-size: 72px;
     text-align: center;
 }
 
 strong {
     font-weight: bold;
+}
+
+.anthropometryContainer row {
+    min-height:200px;
+}
+.localmapping {
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    margin: 0px 0 30px;
+}
+.localTitle {
+    font-size: 30px;
+    text-align: center;
 }

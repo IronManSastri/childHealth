@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from littleStar.forms import UserForm,UploadFileForm,UserProfileInfoForm,schoolDetailsForm,kidDetailsForm,anthropometryForm,dentalForm,pediatricForm
+from littleStar.forms import UserForm,UploadFileForm,UserProfileInfoForm,schoolDetailsForm,kidDetailsForm,anthropometryForm,dentalForm,pediatricForm,nutritionForm,optholForm
 import xlrd
 from django.core.files.storage import FileSystemStorage
 import datetime
 from datetime import date
 from django.contrib import messages
+# from rest_framework.renderers import JSONRenderer
+from django.core import serializers
 
-from littleStar.models import kiddetails,CreateSchool,UserProfileInfo,anthropometry,Dental,Pediatrics
+from littleStar.models import kiddetails,CreateSchool,UserProfileInfo,anthropometry,Dental,Pediatrics,Nutrition,Opthol
 from django.shortcuts import redirect
 
 
@@ -263,11 +265,74 @@ def detailRedirect(request):
                 if (kidsPediatric is not None):
                     return render(request,'littleStar/formCompleted.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization})
                 else:
-                    pediatricsForm = pediatricForm(data=request.POST)
-                    return render(request,'littleStar/pediatrics.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization,'pediatricsForm':pediatricsForm})  
+                    kidsAntropometry = navigateToAnthropomentry(request.POST.get('kidDetails'))
+                    if (kidsAntropometry is not None):
+                        if (kidsAntropometry.sign == "false"):
+                            return render(request,'littleStar/pediatrics.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization,'kidsAntropometry':kidsAntropometry,'isVerifiedFalse': False})  
+                        else:
+                            pediatricsForm = pediatricForm(data=request.POST)
+                            return render(request,'littleStar/pediatrics.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization,'pediatricsForm':pediatricsForm,'isVerifiedFalse': True})  
+                    
+                    else:
+                        return render(request,'littleStar/pediatrics.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization,'didntFillAnthro': True})  
 
+            if (doctorSpecialization == 'nutrition'):
+
+                kidsNutrition = checkNutritionRecord(request.POST.get('kidDetails'))
+                
+                if (kidsNutrition is not None):
+
+                    return render(request,'littleStar/formCompleted.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization})
+                else:
+                    nutrition_Form = nutritionForm(data=request.POST)
+                    return render(request,'littleStar/nutrition.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization,'nutrition_Form':nutritionForm})  
+
+            if (doctorSpecialization == 'opthomology'):
+
+                kidsNutrition = checkOptholRecord(request.POST.get('kidDetails'))
+                
+                if (kidsNutrition is not None):
+                    return render(request,'littleStar/formCompleted.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization})
+                else:
+                    opthol_Form = optholForm({'Unaidedvisualacuityrighteye':'lesstThanSixBySixty','UnaidedvisualacuityLefteye':'lesstThanSixBySixty',
+                    'Unaidedvisualacuitywithpinholerighteye':'lesstThanSixBySixty' ,'Unaidedvisualacuitywithpinholelefteye':'lesstThanSixBySixty',
+                    'Unaidedvisualacuitynearrighteye':'nsix','Unaidedvisualacuitynearlefteye':'nsix','visionwithpresentglassesdistancerighteye':'lesstThanSixBySixty',
+                    'visionwithpresentglassesdistancelefteye':'lesstThanSixBySixty','visionwithpresentglassesdistancewithpinholerighteye':'lesstThanSixBySixty',
+                    'visionwithpresentglassesdistancewithpinholelefteye':'lesstThanSixBySixty',
+                    'visionwithpresentglassesnearrighteye':'nsix','visionwithpresentglassesnearlefteye':'nsix',
+                    'externaleyeexaminationnormal':'none','externaleyeexaminationmeibomitis':'none','externaleyeexaminationblepharitis':'none',
+                    'externaleyeexaminationchalazion':'none','externaleyeexaminationsyte':'none','externaleyeexaminationcoloboma':'none',
+                    'externaleyeexaminationepicanthus':'none','externaleyeexaminationentropion':'none',
+                    'corneanormal':'none','corneaclear':'none','corneascar':'none','corneamegalocornea':'none',
+                    'corneamicrocornea':'none','corneaedema':'none','corneacornealplana':'none',
+                    'corneacloudycornea':'none','conjunctivanormal':'none','conjunctivapinguicula':'none','conjunctivapteryguim':'none','conjunctivabitotspots':'none','conjunctivacongestion':'none',
+                    'irisnormal':'none','irisheterocromia':'none','iriscorectopia':'none','irispolycoria':'none','iriscoloboma':'none',
+                    'lensnormal':'none','lensclear':'none','lenscataract':'none','lenspseudophakia':'none','lenslenticonus':'none',
+                    'lenscoloboma':'none','lensmicrospherophakia':'none','ambylopia':'none','strabismusesotropia':'none',
+                    'strabismusexotropia':'none','strabismusesophoria':'none','strabismusexophoria':'none','pupillaryreflex':'roundandreacting',
+                    'colorvision':'normal','provisionaldiagnosisnormal':'none',
+                    'provisionaldiagnosisnormal':'none','provisionaldiagnosismyopia':'none','provisionaldiagnosishyperopia':'none',
+                    'provisionaldiagnosisastigmatism':'none','provisionaldiagnosisambylopia':'none','provisionaldiagnosisstrabismus':'none',
+                    'provisionaldiagnosisnystagmus':'none','provisionaldiagnosisptosis':'none','provisionaldiagnosisconvergence':'none',
+                    'provisionaldiagnosisinsufficiency':'none','provisionaldiagnosisblepharitis':'none','provisionaldiagnosismeibomitis':'none',
+                    'provisionaldiagnosiscolorvision':'none','provisionaldiagnosisblindness':'none','doctoradviceoptions':'needsroutineeyetesteveryyear',
+                    'recommendationslist':'noactionrequiredimmediately'
+                    })
+                    return render(request,'littleStar/optomology.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization,'opthol_Form':opthol_Form})  
+
+
+                
             # return render(request,'littleStar/details.html',{'kidUID':kidIndividualDetails,'doctorSpecialization':doctorSpecialization})
 
+
+#check for the record of optometry with childuil
+def checkOptholRecord(kidChildUid):
+    try:
+        kidsPediatric = Opthol.objects.get(childuid = kidChildUid)
+    except:
+        kidsPediatric = None
+
+    return kidsPediatric
 
 #check for the record of pediatrics with childuid
 def checkPediatricRecord(kidChildUid):
@@ -277,6 +342,15 @@ def checkPediatricRecord(kidChildUid):
         kidsPediatric = None
 
     return kidsPediatric
+
+#check for the record of nutrition with childuid
+def checkNutritionRecord(kidChildUid):
+    try:
+        kidsNutrition = Nutrition.objects.get(childuid = kidChildUid)
+    except:
+        kidsNutrition = None
+
+    return kidsNutrition
 
 
 #check for the record of dental with childuid
@@ -302,7 +376,7 @@ def navigateToAnthropomentry(kidChildUid):
 
 def anthropometryView(request):
     anthropometry_form = anthropometryForm(data=request.POST)
-
+    print(request.POST)
     if anthropometry_form.is_valid():
         anthropometry_form.save(commit=False)
         anthropometry_form.weight= request.POST["weight"] 
@@ -312,7 +386,14 @@ def anthropometryView(request):
         anthropometry_form.midupperarmcircumference= request.POST["midupperarmcircumference"]
         anthropometry_form.tricepskinfoldness=request.POST["tricepskinfoldness"]
         anthropometry_form.bsa=request.POST["bsa"] 
-        anthropometry_form.year= request.POST["year"] 
+        anthropometry_form.year= request.POST["year"]
+        anthropometry_form.heartrate= request.POST["heartrate"]
+        anthropometry_form.temparature= request.POST["temparature"]
+        anthropometry_form.saturation= request.POST["saturation"]
+        anthropometry_form.systolic= request.POST["systolic"]
+        anthropometry_form.diastolic= request.POST["diastolic"]
+        anthropometry_form.sign= request.POST["sign"]
+        anthropometry_form.respiratoryrate = request.POST['respiratoryrate']
         anthropometry_form.kiduid =request.POST.get('kiduid')
         anthropometry_form.save()
         anthropometryCreationMessage = str(request.POST["kiduid"]) + "'s vitals Data has been created"
@@ -336,7 +417,6 @@ def pediatrics(request):
 
     pediatrics_form = pediatricForm(data=request.POST)
     
-    print(request.POST)
     if request.method == 'POST':
 
         if pediatrics_form.is_valid():
@@ -346,3 +426,75 @@ def pediatrics(request):
     pediatricMessage = str(request.POST["childuid"]) + "'s Pediatrics Data has been created"
     messages.success(request, pediatricMessage)
     return HttpResponseRedirect(reverse('index'))
+
+
+def nutrition(request):
+
+    nutrition_Form =  nutritionForm(data=request.POST)
+    if request.method == 'POST':
+        if nutrition_Form.is_valid():
+            nutrition_Form.save()
+    
+    
+    nurtritionMessage = str(request.POST["childuid"]) + "'s Nutrition Data has been created"
+    messages.success(request, nurtritionMessage)
+    return HttpResponseRedirect(reverse('index'))
+
+def optomology(request):
+
+    optomology_Form =  optholForm(data=request.POST)
+    if request.method == 'POST':
+        if optomology_Form.is_valid():
+            optomology_Form.save() 
+    
+    
+    optomologyMessage = str(request.POST["childuid"]) + "'s optomology Data has been created"
+    messages.success(request, optomologyMessage)
+    return HttpResponseRedirect(reverse('index'))
+
+
+def dummyAjaxCall(request):
+    print(request.POST['kiduid'])
+    kidsAntropometry = anthropometry.objects.filter(kiduid = request.POST['kiduid'] , year = datetime.datetime.now().year)
+    data = serializers.serialize('json', kidsAntropometry)
+    return HttpResponse(data)
+
+
+def updateAnthropometryForm(request):
+    print(request.POST)
+    # anthropometry.objects.filter(kiduid = "VIHLAX12").update({height:request.POST.height})
+    anthropometry.objects.filter(kiduid = request.POST['kiduid']).update(
+        height= request.POST['height'],
+        weight= request.POST["weight"],
+        bmi=request.POST["bmi"],
+        headcircumference=request.POST["headcircumference"],
+        midupperarmcircumference= request.POST["midupperarmcircumference"],
+        tricepskinfoldness=request.POST["tricepskinfoldness"],
+        bsa=request.POST["bsa"],
+        year= request.POST["year"],
+        heartrate= request.POST["heartrate"],
+        temparature= request.POST["temparature"],
+        saturation= request.POST["saturation"],
+        systolic= request.POST["systolic"],
+        diastolic= request.POST["diastolic"],
+        sign= True,
+        respiratoryrate = request.POST['respiratoryrate'],
+        kiduid =request.POST.get('kiduid')
+         )
+
+
+    kidUID = request.POST.get('kiduid')
+
+    try:
+        kidIndividualDetails = kiddetails.objects.get(childuid = kidUID )
+
+    except kiddetails.DoesNotExist:
+        kidIndividualDetails=None
+
+    else:
+        print ("Apress is in the database.")
+
+    pediatricsForm = pediatricForm(data=request.POST)
+    return render(request,'littleStar/pediatrics.html',{'kidUID':kidIndividualDetails,'pediatricsForm':pediatricsForm,'isVerifiedFalse': True})  
+
+

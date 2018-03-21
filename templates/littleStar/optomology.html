@@ -1,0 +1,496 @@
+{% extends 'littleStar/base.html' %}{% load static %} {% block body_block %}
+<div class="container">
+   <div class="col-lg-12">
+      <div class="row kidPersonalDetails">
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>UID:</strong>
+            </p>
+            <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Name:</strong>
+            </p>
+            <p> {{kidUID.childname}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Date of Birth:</strong>
+            </p>
+            <p>{{kidUID.dob}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Father's Name:</strong>
+            </p>
+            <p>{{kidUID.fathername}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Mother's Name:</strong>
+            </p>
+            <p>{{kidUID.mothername}}</p>
+         </div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Sex:</strong>
+            </p>
+            <p>{{kidUID.sex}}</p>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-12">
+      <div class="row kidDetailsForms optholContainer">
+         <p class="mainTitle">Optomology</p>
+         <form enctype="multipart/form-data"  method="POST" action="{% url 'littleStar:optomology' %}" novalidate >
+            {% csrf_token %}
+            <div class="row" style="display: none;">
+               <div class="input-field">
+                  <label for="id_kidUid">KidUid:</label>
+                  <input type="text" name="childuid" ="" id="id_kidUid" maxlength="245" value=""> 
+               </div>
+            </div>
+            <p class="subHeadings">Unaided visual acuity (Distance)</p>
+            <div class="row">
+               <div class="col-lg-6 form-group">
+                  <label>Right Eye</label><br />
+                  {{ opthol_Form.Unaidedvisualacuityrighteye }}
+               </div>
+               <div class="col-lg-6 form-group">
+                  <label>Left Eye</label><br />
+                  {{ opthol_Form.UnaidedvisualacuityLefteye }}
+               </div>
+            </div>
+            <p class="subHeadings">Unaided visual acuity with Pin Hole (Distance)</p>
+            <div class="row">
+               <div class="col-lg-6 form-group">
+                  <label>Right Eye</label><br />
+                  {{ opthol_Form.Unaidedvisualacuitywithpinholerighteye }}
+               </div>
+               <div class="col-lg-6 form-group">
+                  <label>Left Eye</label><br />
+                  {{ opthol_Form.Unaidedvisualacuitywithpinholelefteye }}
+               </div>
+            </div>
+            <p class="subHeadings">Unaided visual acuity (Near)</p>
+            <div class="row">
+               <div class="col-lg-6 form-group">
+                  <label>Right Eye</label><br />
+                  {{ opthol_Form.Unaidedvisualacuitynearrighteye }}
+               </div>
+               <div class="col-lg-6 form-group">
+                  <label>Left Eye</label><br />
+                  {{ opthol_Form.Unaidedvisualacuitynearlefteye }}
+               </div>
+            </div>
+            <p class="subHeadings">Vision with present Glasses (Distance)</p>
+            <div class="row">
+               <div class="col-lg-6 form-group">
+                  <label>Right Eye</label><br />
+                  {{ opthol_Form.visionwithpresentglassesdistancerighteye }}
+               </div>
+               <div class="col-lg-6 form-group">
+                  <label>Left Eye</label><br />
+                  {{ opthol_Form.visionwithpresentglassesdistancelefteye }}
+               </div>
+            </div>
+            <p class="subHeadings">Vision with present Glasses with Pin Hole </p>
+            <div class="row">
+               <div class="col-lg-6 form-group">
+                  <label>Right Eye</label><br />
+                  {{ opthol_Form.visionwithpresentglassesdistancewithpinholerighteye }}
+               </div>
+               <div class="col-lg-6 form-group">
+                  <label>Left Eye</label><br />
+                  {{ opthol_Form.visionwithpresentglassesdistancewithpinholelefteye }}
+               </div>
+            </div>
+            <p class="subHeadings">Vision with present Glasses (Near) </p>
+            <div class="row">
+               <div class="col-lg-6 form-group">
+                  <label>Right Eye</label><br />
+                  {{ opthol_Form.visionwithpresentglassesnearrighteye }}
+               </div>
+               <div class="col-lg-6 form-group">
+                  <label>Left Eye</label><br />
+                  {{ opthol_Form.visionwithpresentglassesnearlefteye }}
+               </div>
+            </div>
+            <p class="subHeadings">SUBECTIVE REFRACTION </p>
+            <div class="row">
+               <div class="col-lg-3 form-group">
+                  <label>Right Eye</label>
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>SPH</label><br />
+                  {{ opthol_Form.subjectiverefractionrighteyesph }}
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>CYL</label><br />
+                  {{ opthol_Form.subjectiverefractionrighteyecyl }}
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>AXIS</label><br />
+                  {{ opthol_Form.subjectiverefractionrighteyeaxis }}
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>ADD</label><br />
+                  {{ opthol_Form.subjectiverefractionrighteyeadd }}
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-3 form-group">
+                  <label>Left Eye</label>
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>SPH</label><br />
+                  {{ opthol_Form.subjectiverefractionlefteyesph }}
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>CYL</label><br />
+                  {{ opthol_Form.subjectiverefractionlefteyecyl }}
+               </div>
+               <div class="col-lg-2  col-xs-6 form-group">
+                  <label>AXIS</label><br />
+                  {{ opthol_Form.subjectiverefractionlefteyeaxis }}
+               </div>
+               <div class="col-lg-2 col-xs-6 form-group">
+                  <label>ADD</label><br />
+                  {{ opthol_Form.subjectiverefractionlefteyeadd }}
+               </div>
+            </div>
+            <p class="subHeadings">EXTERNAL EYE EXAMINATION </p>
+            <div class="row">
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Normal</label><br />
+                  {{ opthol_Form.externaleyeexaminationnormal }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Meibomitis</label><br />
+                  {{ opthol_Form.externaleyeexaminationmeibomitis }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Blepharitis</label><br />
+                  {{ opthol_Form.externaleyeexaminationblepharitis }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Chalazion</label><br />
+                  {{ opthol_Form.externaleyeexaminationchalazion }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Syte</label><br />
+                  {{ opthol_Form.externaleyeexaminationsyte }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Coloboma</label><br />
+                  {{ opthol_Form.externaleyeexaminationcoloboma }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Epicanthus</label><br />
+                  {{ opthol_Form.externaleyeexaminationepicanthus }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Entropion</label><br />
+                  {{ opthol_Form.externaleyeexaminationentropion }}
+               </div>
+            </div>
+            <p class="subHeadings">CORNEA </p>
+            <div class="row">
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Normal</label><br />
+                  {{ opthol_Form.corneanormal }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Clear</label><br />
+                  {{ opthol_Form.corneaclear }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Scar</label><br />
+                  {{ opthol_Form.corneascar }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Megalo Cornea</label><br />
+                  {{ opthol_Form.corneamegalocornea }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Micro Cornea</label><br />
+                  {{ opthol_Form.corneamicrocornea }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Edema </label><br />
+                  {{ opthol_Form.corneaedema }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Corneal Plana</label><br />
+                  {{ opthol_Form.corneacornealplana }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Cloudy Cornea</label><br />
+                  {{ opthol_Form.corneacloudycornea }}
+               </div>
+            </div>
+            <p class="subHeadings">CONJUNCTIVA </p>
+            <div class="row">
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Normal</label><br />
+                  {{ opthol_Form.conjunctivanormal }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Pinguicula</label><br />
+                  {{ opthol_Form.conjunctivapinguicula }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Pteryguim</label><br />
+                  {{ opthol_Form.conjunctivapteryguim }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Bitot's Spots</label><br />
+                  {{ opthol_Form.conjunctivabitotspots }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Congestion</label><br />
+                  {{ opthol_Form.conjunctivacongestion }}
+               </div>
+              
+            </div>
+            <hr>
+            <p class="subHeadings">IRIS </p>
+            <div class="row">
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Normal</label><br />
+                  {{ opthol_Form.irisnormal }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Heterocromia</label><br />
+                  {{ opthol_Form.irisheterocromia }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Corectopia</label><br />
+                  {{ opthol_Form.iriscorectopia }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Polycoria</label><br />
+                  {{ opthol_Form.irispolycoria }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Coloboma</label><br />
+                  {{ opthol_Form.iriscoloboma }}
+               </div>
+              
+            </div>
+            <p class="subHeadings">LENS </p>
+            <div class="row">
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Normal</label><br />
+                  {{ opthol_Form.lensnormal }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Clear</label><br />
+                  {{ opthol_Form.lensclear }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Cataract</label><br />
+                  {{ opthol_Form.lenscataract }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Pseudophakia</label><br />
+                  {{ opthol_Form.lenspseudophakia }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Lenticonus</label><br />
+                  {{ opthol_Form.lenslenticonus }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Coloboma </label><br />
+                  {{ opthol_Form.lenscoloboma }}
+               </div>
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Micro Spherophakia</label><br />
+                  {{ opthol_Form.lensmicrospherophakia }}
+               </div>
+              
+            </div>
+            <hr>
+            <div class="row">
+               <div class="col-lg-3 col-xs-6 form-group">
+                  <label>Ambylopia</label><br />
+                  {{ opthol_Form.ambylopia }}
+               </div>
+            </div>
+
+            <p class="subHeadings">STRABISMUS </p>
+            <div class="row">
+                  <div class="col-lg-3 col-xs-6 form-group">
+                     <label>Esotropia</label><br />
+                     {{ opthol_Form.strabismusesotropia }}
+                  </div>
+                  <div class="col-lg-3 col-xs-6 form-group">
+                        <label>Exotropia</label><br />
+                        {{ opthol_Form.strabismusexotropia }}
+                  </div>
+                  <div class="col-lg-3 col-xs-6 form-group">
+                        <label>Esophoria</label><br />
+                        {{ opthol_Form.strabismusesophoria }}
+                  </div>
+                  <div class="col-lg-3 col-xs-6 form-group">
+                       <label>Exophoria</label><br />
+                       {{ opthol_Form.strabismusexophoria }}
+                   </div>
+               </div>
+               <hr/>
+               <div class="row">
+                  <div class="col-lg-3 col-xs-6 form-group">
+                     <label>Pupillary Reflex</label><br />
+                     {{ opthol_Form.pupillaryreflex }}
+                  </div>
+               </div>
+               <hr/>
+               <div class="row">
+                  <div class="col-lg-12 col-xs-12 form-group">
+                     <label>Binocular Function</label><br />
+                     {{ opthol_Form.binocularfunction }}
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-lg-12 col-xs-12 form-group">
+                     <label>Accomodation and Vergence</label><br />
+                     {{ opthol_Form.accomodationandvergence }}
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col-lg-4 col-xs-12 form-group">
+                     <label>Color Vision</label><br />
+                     {{ opthol_Form.colorvision }}
+                  </div>
+                
+               </div>
+               <div class="row">
+                  <div class="col-lg-12 col-xs-12 form-group">
+                     <label>Occulo Motor Function</label><br />
+                     {{ opthol_Form.occulomotorfunction }}
+                  </div>
+               </div>
+
+
+               <p class="subHeadings">PROVISIONAL DIAGNOSIS </p>
+               <div class="row">
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Normal</label><br />
+                        {{ opthol_Form.provisionaldiagnosisnormal }}
+                     </div>
+           
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Ambylopia</label><br />
+                        {{ opthol_Form.provisionaldiagnosisambylopia }}
+                  </div>
+                 
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Nystagmus</label><br />
+                        {{ opthol_Form.provisionaldiagnosisnystagmus }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Ptosis</label><br />
+                        {{ opthol_Form.provisionaldiagnosisptosis }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Convergence</label><br />
+                        {{ opthol_Form.provisionaldiagnosisconvergence }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Insufficiency</label><br />
+                        {{ opthol_Form.provisionaldiagnosisinsufficiency }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Blepharitis</label><br />
+                        {{ opthol_Form.provisionaldiagnosisblepharitis }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Meibomitis</label><br />
+                        {{ opthol_Form.provisionaldiagnosismeibomitis }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Color Vision</label><br />
+                        {{ opthol_Form.provisionaldiagnosiscolorvision }}
+                  </div>
+                  <div class="col-lg-4 col-xs-12 form-group">
+                        <label>Blindness</label><br />
+                        {{ opthol_Form.provisionaldiagnosisblindness }}
+                  </div>
+               </div>
+               <div class="specialCasesHolder">
+                  <div class="row">
+                        <div class="col-lg-4 col-xs-12 form-group changeEyeProblem">
+                              <label>Myopia</label><br />
+                              {{ opthol_Form.provisionaldiagnosismyopia }}
+                        </div>
+                        <div class="col-lg-4 col-xs-12 form-group" style="display:none">
+                              <label>Conditions</label><br />
+                              {{ opthol_Form.provisionaldiagnosismyopiaconditions }}
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4 col-xs-12 form-group changeEyeProblem">
+                              <label>Hyperopia</label><br />
+                              {{ opthol_Form.provisionaldiagnosishyperopia }}
+                        </div>
+                        <div class="col-lg-4 col-xs-12 form-group" style="display:none">
+                              <label>Conditions</label><br />
+                              {{ opthol_Form.provisionaldiagnosishyperopiaconditions }}
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4 col-xs-12 form-group changeEyeProblem">
+                              <label>Astigmatism</label><br />
+                              {{ opthol_Form.provisionaldiagnosisastigmatism }}
+                        </div>
+                        <div class="col-lg-4 col-xs-12 form-group" style="display:none">
+                              <label>Conditions</label><br />
+                              {{ opthol_Form.provisionaldiagnosisastigmatismconditions }}
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4 col-xs-12 form-group changeEyeProblem">
+                              <label>Strabismus</label><br />
+                              {{ opthol_Form.provisionaldiagnosisstrabismus }}
+                        </div>
+                        <div class="col-lg-4 col-xs-12 form-group" style="display:none">
+                              <label>Conditions</label><br />
+                              {{ opthol_Form.provisionaldiagnosisstrabismuscondtions }}
+                        </div>
+                        
+                     </div>
+               </div>
+               <div class="finaladvices">
+                  <div class="row">
+                        <div class="col-lg-4 col-xs-12 form-group">
+                           <label>Advice</label><br />
+                           {{ opthol_Form.doctoradviceoptions }}
+                        </div>
+                        <div class="col-lg-8 col-xs-12 form-group"  style="display:none">
+                           <label>Other Advice</label><br />
+                           {{ opthol_Form.doctorotheradviceoptions }}
+                        </div>
+                     </div>
+   
+                     <div class="row">
+                           <div class="col-lg-4 col-xs-12 form-group">
+                              <label>Recommendations</label><br />
+                              {{ opthol_Form.recommendationslist }}
+                           </div>
+                           <div class="col-lg-8 col-xs-12 form-group"  style="display:none">
+                              <label>Other Advice</label><br />
+                              {{ opthol_Form.recommendationslistothers }}
+                           </div>
+                        </div>
+               </div>
+
+
+              
+            <button type="submit" name="" class="loginSubmit">Create </button>
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock %}

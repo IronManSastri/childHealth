@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from littleStar.models import UserProfileInfo, kiddetails,CreateSchool,anthropometry,Dental, Pediatrics
+from littleStar.models import UserProfileInfo, kiddetails,CreateSchool,anthropometry,Dental, Pediatrics,Nutrition, Opthol
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -15,6 +15,61 @@ class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
         fields = ('doctorSpecialization',)
+
+
+class nutritionForm(forms.ModelForm):
+    childuid = forms.CharField()
+    observations = forms.CharField(widget=forms.Textarea)
+    recommendations = forms.CharField(widget=forms.Textarea)
+
+    class Meta():
+        model = Nutrition
+        fields = ('childuid','observations','recommendations')
+
+    def __init__(self, *args, **kwargs):
+    
+       super(nutritionForm, self).__init__(*args, **kwargs)
+
+       for key in self.fields:
+          self.fields[key].required = False  
+                
+
+class optholForm(forms.ModelForm):
+    binocularfunction = forms.CharField(widget=forms.Textarea)
+    accomodationandvergence = forms.CharField(widget=forms.Textarea)
+    occulomotorfunction  =forms.CharField(widget=forms.Textarea)
+    doctorotheradviceoptions = forms.CharField(widget=forms.Textarea)
+    recommendationslistothers = forms.CharField(widget=forms.Textarea)
+    class Meta():
+        model = Opthol
+    
+        fields = ('Unaidedvisualacuityrighteye','UnaidedvisualacuityLefteye','childuid','Unaidedvisualacuitywithpinholerighteye','Unaidedvisualacuitywithpinholelefteye','Unaidedvisualacuitynearrighteye',
+        'Unaidedvisualacuitynearlefteye','visionwithpresentglassesdistancerighteye','visionwithpresentglassesdistancelefteye','visionwithpresentglassesdistancewithpinholerighteye',
+        'visionwithpresentglassesdistancewithpinholelefteye','visionwithpresentglassesnearrighteye','visionwithpresentglassesnearlefteye',
+        'subjectiverefractionrighteyesph','subjectiverefractionlefteyesph','subjectiverefractionrighteyecyl','subjectiverefractionlefteyecyl',
+        'subjectiverefractionrighteyeaxis','subjectiverefractionlefteyeaxis','subjectiverefractionrighteyeadd','subjectiverefractionlefteyeadd',
+        'externaleyeexaminationnormal','externaleyeexaminationmeibomitis','externaleyeexaminationblepharitis','externaleyeexaminationchalazion','externaleyeexaminationsyte',
+        'externaleyeexaminationcoloboma','externaleyeexaminationepicanthus','externaleyeexaminationentropion',
+        'corneanormal','corneaclear','corneascar','corneamegalocornea','corneamicrocornea','corneaedema','corneacornealplana',
+        'corneacloudycornea','conjunctivanormal','conjunctivapinguicula','conjunctivapteryguim','conjunctivabitotspots','conjunctivacongestion',
+        'irisnormal','irisheterocromia','iriscorectopia','irispolycoria','iriscoloboma','lensnormal','lensclear','lenscataract','lenspseudophakia','lenslenticonus',
+        'lenscoloboma','lensmicrospherophakia','ambylopia','strabismusesotropia','strabismusexotropia','strabismusesophoria','strabismusexophoria',
+        'pupillaryreflex','accomodationandvergence','binocularfunction','colorvision','occulomotorfunction','provisionaldiagnosisnormal',
+        'provisionaldiagnosisnormal','provisionaldiagnosismyopia','provisionaldiagnosishyperopia','provisionaldiagnosisastigmatism',
+        'provisionaldiagnosisambylopia','provisionaldiagnosisstrabismus','provisionaldiagnosisnystagmus','provisionaldiagnosisptosis',
+        'provisionaldiagnosisconvergence','provisionaldiagnosisinsufficiency','provisionaldiagnosisblepharitis','provisionaldiagnosismeibomitis',
+        'provisionaldiagnosiscolorvision','provisionaldiagnosisblindness','provisionaldiagnosismyopiaconditions','provisionaldiagnosishyperopiaconditions',
+        'provisionaldiagnosisastigmatismconditions','provisionaldiagnosisstrabismuscondtions','doctoradviceoptions','doctorotheradviceoptions','recommendationslist','recommendationslistothers'
+
+        )
+    def __init__(self, *args, **kwargs):
+    
+       super(optholForm, self).__init__(*args, **kwargs)
+
+       for key in self.fields:
+          self.fields[key].required = False 
+
+
 
 
 class dentalForm(forms.ModelForm):
@@ -73,6 +128,8 @@ class anthropometryForm(forms.ModelForm):
     # KID_DETAILS = forms.CharField(widget=forms.HiddenInput, label='')
     class Meta():
         model = anthropometry
-        fields = ('height','weight','headcircumference','midupperarmcircumference','tricepskinfoldness','bmi','bsa','year','kiduid')
+        fields = ('height','weight','headcircumference','midupperarmcircumference','tricepskinfoldness','bmi','bsa','year','kiduid','heartrate','temparature','saturation',
+        'respiratoryrate','systolic','diastolic','sign'
+        )
 
 

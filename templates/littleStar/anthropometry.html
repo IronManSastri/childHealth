@@ -2,7 +2,6 @@
 <div class="container">
    <div class="col-lg-12">
       <div class="row kidPersonalDetails">
-        <div class="col-lg-1"></div>
          <div class="col-lg-2">
             <p class="titles">
                <strong>UID:</strong>
@@ -33,12 +32,19 @@
             </p>
             <p>{{kidUID.mothername}}</p>
          </div>
-         <div class="col-lg-1"></div>
+         <div class="col-lg-2">
+            <p class="titles">
+               <strong>Sex:</strong>
+            </p>
+            <p>{{kidUID.sex}}</p>
+         </div>
       </div>
    </div>
+   <form enctype="multipart/form-data" class="" method="POST" action="{% url 'littleStar:anthropometry' %}"
+   novalidate id="anthropometryForm">
+   {% csrf_token %}
    <div class="col-lg-12">
       <div class="row kidDetailsForms">
-        
          <p class="loginHeader">Anthropometry</p>
          <div class="anthromentryFromToBeShown">
             <div class="col-lg-6">
@@ -55,10 +61,9 @@
                   <p id="calculatedBSA">0</p>
                </div>
             </div>
-            <form enctype="multipart/form-data" class="col-lg-6" method="POST" action="{% url 'littleStar:anthropometry' %}"
-               novalidate id="anthropometryForm">
-               {% csrf_token %}
-               <div class="row">
+           
+               <div class="col-lg-6">
+                     <div class="row">
                   <div class="input-field">
                      <label for="id_HEIGHT">HEIGHT:</label>
                      <input type="number" name="height" required="" value="{{anthropometry_form.height}}"
@@ -114,12 +119,109 @@
                   <div class="input-field">
                      <label for="id_kidUid">KidUid:</label>
                      <input type="text" name="kiduid" required="" id="id_kidUid" maxlength="245" value={{anthropometry_form.kiduid}}> 
-                  </div>
+                  </div> 
                </div>
-               <button type="submit" name="" class="loginSubmit">Create </button>
-            </form>
+               </div>
+              
          </div>
       </div>
    </div>
+   <div class="col-lg-12">
+      <div class="row kidDetailsForms">
+         <p class="loginHeader">Vitals</p>
+        
+         <div class="col-lg-6">
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_heartrate">Heart Rate:</label>
+                  <input type="number" name="heartrate" required="" id="id_heartrate"
+                     value=''> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_temparature">Temparature:</label>
+                  <input type="number" name="temparature" required="" id="id_temparature"
+                     value=''> 
+               </div>
+            </div>
+            <div class="row">
+                        <div class="input-field">
+                           <label for="id_respiratoryrate">Respiratoy Rate:</label>
+                           <input type="number" name="respiratoryrate" required="" id="id_respiratoryrate"
+                              value=''> 
+                        </div>
+                     </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_saturation">Saturation:</label>
+                  <input type="number" name="saturation" required="" id="id_saturation"
+                     value=''> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="input-field">
+                  <label for="id_bloodpressure1">Blood Pressure1:</label>
+                  <input type="text" name="bloodpressure1" required="" id="id_bloodpressure1"
+                     value=''> 
+               </div>
+            </div>
+            <div class="row">
+                  <div class="input-field">
+                     <label for="id_bloodpressure2">Blood Pressure2:</label>
+                     <input type="text" name="bloodpressure2" required="" id="id_bloodpressure2"
+                        value=''> 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="input-field">
+                     <label for="id_bloodpressure3">Blood Pressure3:</label>
+                     <input type="text" name="bloodpressure3" required="" id="id_bloodpressure3"
+                        value=''> 
+                  </div>
+               </div>
+               <div class="row">
+                  <button type="button"  id="calculateBp" class="btn btn-warning">Take BP average</button>
+                  
+               </div>
+            <div class="row" style="display: none;">
+               <div class="input-field">
+                  <label for="id_systolic">Systolic:</label>
+                  <input type="number" name="systolic" required="" id="id_systolic"
+                     value=''> 
+               </div>
+            </div>
+            <div class="row" style="display: none;">
+               <div class="input-field">
+                  <label for="id_diastolic">Diastolic:</label>
+                  <input type="number" name="diastolic" required="" id="id_diastolic"
+                     value=''> 
+               </div>
+            </div>
+            <div class="row" style="display: none;">
+                        <div class="input-field">
+                           <input type="" name="sign" required="" id="anthroSign"
+                              value=''> 
+                        </div>
+                     </div>
+         </div>
+         <div class="col-lg-6">
+            <div class="bmiHolder">
+               <p class="bmiTitle">
+                  <strong>Systolic:</strong>
+               </p>
+               <p id="calculatedSystolic">0</p>
+            </div>
+            <div class="bmiHolder">
+               <p class="bmiTitle">
+                  <strong>Diastolic:</strong>
+               </p>
+               <p id="calculatedDiastolic">0</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <button type="submit" name="" class="loginSubmit">Create </button>
+</form>
 </div>
 {% endblock %}

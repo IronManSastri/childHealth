@@ -16,7 +16,15 @@ urlpatterns=[
     url(r'^createSchool/$',views.createSchool,name='createSchool'),
     url(r'^anthropometry/$', views.anthropometryView, name = 'anthropometry'),
     url(r'^dental/$', views.dental, name = 'dental'),
-    url(r'^pediatrics/$', views.pediatrics, name = 'pediatrics')
+    url(r'^pediatrics/$', views.pediatrics, name = 'pediatrics'),
+    url(r'^nutrition/$', views.nutrition, name = 'nutrition'),
+    url(r'^optomology/$', views.optomology, name = 'optomology'),
+    url(r'^dummyAjaxCall/$', views.dummyAjaxCall, name = 'dummyAjaxCall'),
+    url(r'^updateAnthropometryForm/$', views.updateAnthropometryForm, name = 'updateAnthropometryForm'),
+
+
+
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

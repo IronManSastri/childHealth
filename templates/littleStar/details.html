@@ -1,40 +1,44 @@
 {% extends 'littleStar/base.html' %}{% load static %} {% block body_block %}
 <div class="container">
     <div class="col-lg-12">
-            <div class="row kidPersonalDetails">
-                    <div class="col-lg-1"></div>
-                     <div class="col-lg-2">
-                        <p class="titles">
-                           <strong>UID:</strong>
-                        </p>
-                        <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
-                     </div>
-                     <div class="col-lg-2">
-                        <p class="titles">
-                           <strong>Name:</strong>
-                        </p>
-                        <p> {{kidUID.childname}}</p>
-                     </div>
-                     <div class="col-lg-2">
-                        <p class="titles">
-                           <strong>Date of Birth:</strong>
-                        </p>
-                        <p>{{kidUID.dob}}</p>
-                     </div>
-                     <div class="col-lg-2">
-                        <p class="titles">
-                           <strong>Father's Name:</strong>
-                        </p>
-                        <p>{{kidUID.fathername}}</p>
-                     </div>
-                     <div class="col-lg-2">
-                        <p class="titles">
-                           <strong>Mother's Name:</strong>
-                        </p>
-                        <p>{{kidUID.mothername}}</p>
-                     </div>
-                     <div class="col-lg-1"></div>
-                  </div>{% if doctorSpecialization == 'anthropometry' %} {% endif %} </div>
+        <div class="row kidPersonalDetails">
+            <div class="col-lg-2">
+               <p class="titles">
+                  <strong>UID:</strong>
+               </p>
+               <p class="uidDisplay" id="uidDisplay">{{kidUID.childuid}}</p>
+            </div>
+            <div class="col-lg-2">
+               <p class="titles">
+                  <strong>Name:</strong>
+               </p>
+               <p> {{kidUID.childname}}</p>
+            </div>
+            <div class="col-lg-2">
+               <p class="titles">
+                  <strong>Date of Birth:</strong>
+               </p>
+               <p>{{kidUID.dob}}</p>
+            </div>
+            <div class="col-lg-2">
+               <p class="titles">
+                  <strong>Father's Name:</strong>
+               </p>
+               <p>{{kidUID.fathername}}</p>
+            </div>
+            <div class="col-lg-2">
+               <p class="titles">
+                  <strong>Mother's Name:</strong>
+               </p>
+               <p>{{kidUID.mothername}}</p>
+            </div>
+            <div class="col-lg-2">
+               <p class="titles">
+                  <strong>Sex:</strong>
+               </p>
+               <p>{{kidUID.sex}}</p>
+            </div>
+         </div>{% if doctorSpecialization == 'anthropometry' %} {% endif %} </div>
     <div class="col-lg-12">
         {% if doctorSpecialization == 'anthropometry' %}
                 <div class="row kidDetailsForms">  {% if messages %}
