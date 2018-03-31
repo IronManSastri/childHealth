@@ -210,108 +210,89 @@ $(document).ready(function ()
                 $('.showAfterAjaxCallAnthroDetails').show();
                 $('.loader').addClass('loaderHide')
 
-                var ctx = document.getElementById("myChart");
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        datasets: [{
-                            label: '3rd Percentile',
-                            data: [11.7, 11.9, 12.2, 12.3, 12.4, 12.5, 12.5, 12.6, 12.6, 12.7, 12.7, 12.7, 12.7, 12.8, 12.8, 12.8, 12.9, 12.9, 13, 13, 13.1, 13.1, 13.2, 13.2, 13.3, 13.3, 13.3, 13.4, 13.4, 13.5, 13.5, 13.5, 13.6, 13.6, 13.6, 13.6, 13.7, 13.7, 13.7, 13.7, 13.8, 13.8, 13.8, 13.8, 13.8, 13.9, 13.9, 13.9, 13.9, 13.9, 14, 14, 14, 14, 14.1, 14.1, 14.1, 14.1],
-                            // Changes this dataset to become a line
-                            type: 'line',
-                            radius: 0,
-                            borderColor: ['#e6da48'],
-                            background: '#e6da48',
-                            fill: false,
-                        },
 
-                        {
-                            label: '15th Percentile',
-                            fill: false,
-                            radius: 0,
-                            data: [12.5, 12.8, 13, 13.1, 13.3, 13.3, 13.4, 13.5, 13.5, 13.5, 13.5, 13.6, 13.6, 13.6, 13.7, 13.7, 13.7, 13.8, 13.8, 13.9, 13.9, 14, 14, 14.1, 14.1, 14.2, 14.2, 14.3, 14.3, 14.4, 14.4, 14.4, 14.5, 14.5, 14.5, 14.6, 14.6, 14.6, 14.6, 14.7, 14.7, 14.7, 14.8, 14.8, 14.8, 14.8, 14.9, 14.9, 14.9, 14.9, 15, 15, 15, 15, 15.1, 15.1, 15.1, 15.1]
-                        }, {
-                            label: '50th Percentile',
-                            fill: false,
-                            borderColor: ['#1bbe10'],
-                            radius: 0,
-                            data: [13.5, 13.8, 14.1, 14.2, 14.4, 14.5, 14.5, 14.6, 14.6, 14.6, 14.7, 14.7, 14.7, 14.8, 14.8, 14.8, 14.9, 14.9, 15, 15, 15.1, 15.2, 15.2, 15.3, 15.3, 15.4, 15.4, 15.5, 15.5, 15.6, 15.6, 15.7, 15.7, 15.7, 15.8, 15.8, 15.8, 15.9, 15.9, 15.9, 16, 16, 16, 16.1, 16.1, 16.1, 16.2, 16.2, 16.2, 16.3, 16.3, 16.3, 16.4, 16.4, 16.4, 16.5, 16.5, 16.5]
-                        },
-                        {
-                            label: '85th Percentile',
-                            fill: false,
-                            borderColor: ['#f66464'],
-                            radius: 0,
-                            data: [14.6, 14.9, 15.2, 15.4, 15.5, 15.6, 15.7, 15.8, 15.8, 15.9, 15.9, 15.9, 16, 16, 16, 16.1, 16.1, 16.2, 16.2, 16.3, 16.4, 16.4, 16.5, 16.6, 16.6, 16.7, 16.7, 16.8, 16.9, 16.9, 17, 17, 17.1, 17.1, 17.1, 17.2, 17.2, 17.3, 17.3, 17.4, 17.4, 17.4, 17.5, 17.5, 17.6, 17.6, 17.6, 17.7, 17.7, 17.8, 17.8, 17.8, 17.9, 17.9, 18, 18, 18.1, 18.1]
-                        },
-                        {
-                            label: '97th Percentile',
-                            fill: false,
-                            radius: 0,
-                            borderColor: ['#fa2020'],
-                            data: [15.5, 15.9, 16.2, 16.4, 16.5, 16.7, 16.7, 16.8, 16.9, 16.9, 16.9, 17, 17, 17.1, 17.1, 17.2, 17.2, 17.3, 17.3, 17.4, 17.5, 17.5, 17.6, 17.7, 17.8, 17.8, 17.9, 18, 18, 18.1, 18.2, 18.2, 18.3, 18.3, 18.4, 18.4, 18.5, 18.5, 18.6, 18.6, 18.7, 18.7, 18.8, 18.8, 18.9, 18.9, 19, 19, 19.1, 19.1, 19.2, 19.2, 19.3, 19.3, 19.4, 19.4, 19.5, 19.5]
-                        },
-
-                        {
-                            label: 'MUAC vs Age',
-                            backgroundColor: 'rgba(0,0,0,0.7)',
-                            borderColor: '#fff',
-                            borderWidth: 1,
-                            radius: 5,
-                            type: 'bubble',
-                            data: [
-                                {
-                                    y: parseInt(localJson[0].fields.midupperarmcircumference),
-                                    x: parseInt($('.convertedAge').text()) * 12
-                                }
-                            ]
-                        }
-                        ],
-
-                        labels: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
-
+                var chartData = {
+                    datasets: [{
+                        label: '3rd Percentile',
+                        backgroundColor: 'rgba(255, 255, 255, 0.0)',
+                        borderColor: 'rgba(0, 119, 290, 0.6)',
+                        data: [{ x: 1, y: 10 }, { x: 2, y: 12 }, { x: 3, y: 18 }, { x: 4, y: 5 }, { x: 5, y: 25 }, { x: 6, y: 30 }]
                     },
+                    {
+                        label: '50th Percentile',
+                        backgroundColor: 'rgba(255, 255, 255, 0.0)',
+                        borderColor: 'rgba(120, 0, 190, 0.6)',
+                        data: [{ x: 1, y: 8 }, { x: 2, y: 9 }, { x: 3, y: 16 }, { x: 4, y: 8 }, { x: 5, y: 12 }, { x: 6, y: 20 }]
+                    },
+                    {
+                        label: '99th Percentile',
+                        backgroundColor: 'rgba(255, 255, 255, 0.0)',
+                        borderColor: 'rgba(0, 200, 10, 0.6)',
+                        data: [{ x: 1, y: 10 }, { x: 2, y: 5 }, { x: 3, y: 26 }, { x: 4, y: 18 }, { x: 5, y: 19 }, { x: 6, y: 10 }]
+                    }]
+                };
+
+                var originalController = Chart.controllers.line;
+                Chart.controllers.line = Chart.controllers.line.extend({
+                    draw: function ()
+                    {
+                        originalController.prototype.draw.call(this, arguments);
+                        drawLabels(this);
+                    }
+                });
+
+                function drawLabels(t)
+                {
+                    ctx.save();
+                    ctx.font = Chart.helpers.fontString(12, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.fillStyle = 'red';
+                    ctx.textBaseline = 'bottom';
+
+                    var chartInstance = t.chart;
+                    var datasets = chartInstance.config.data.datasets;
+                    datasets.forEach(function (ds, index)
+                    {
+                        var label = ds.label;
+                        var meta = chartInstance.controller.getDatasetMeta(index);
+                        var len = meta.data.length - 1;
+                        //console.log(ds, meta.data[len]._model);    
+                        var xOffset = meta.data[len]._model.x + 10;
+                        var yOffset = meta.data[len]._model.y;
+                        ctx.fillText(label, xOffset, yOffset);
+                    });
+                    ctx.restore();
+                }
+
+
+                var ctx = document.getElementById("myChart").getContext("2d");
+                var myBar = new Chart(ctx, {
+                    type: 'line',
+                    data: chartData,
                     options: {
-                        legend: {
-                            position: 'right'
-                        },
-                        responsive: true,
-
-                        tooltips: {
-                            enabled: false
-                        },
+                        legend: { display: false },
                         scales: {
-
-                            yAxes: [{
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'MUAC in cms'
-                                },
-                                gridLines: {
-                                    display: false
-                                }
-                            }],
                             xAxes: [{
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'Age in months'
-                                },
-                                gridLines: {
-                                    display: false
-                                },
-                                ticks: {
-                                    autoSkip: false,
-                                    callback: function (value, index, values)
-                                    {
-                                        if (value % 12 === 0) {
-                                            return value;
-                                        }
-                                    }
-                                }
+                                type: 'linear',
+                                scaleLabel: { display: true, labelString: 'Age' }
                             }],
+                            yAxes: [{
+                                ticks: { min: 0 },
+                                scaleLabel: { display: true, labelString: 'MUAC' }
+                            }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 60,
+                                top: 20,
+                                bottom: 0
+                            }
                         }
                     }
                 });
+
+
+
             },
             failure: function (data)
             {
